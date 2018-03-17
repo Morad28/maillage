@@ -110,7 +110,7 @@ La triangulation désigne donc le type le maillage ou le domaine est subdivisé 
 \newpage
 \subsection{Triangulation de Delaunay }
 
-Boris Nikolaïevitch Delaunay1, né le 15 mars 1890 à Saint-Pétersbourg et mort le 17 juillet 1980 à Moscou, était un mathématicien russe. Il a travaillé en algèbre moderne, en géométrie des nombres et en cristallographie mathématique. Il est le plus souvent reconnu pour son travail en 1934 sur les méthodes de triangulations  se basant sur le travail de Georges Voronoï et le diagramme de Voronoï. \footnote{B. Delaunay, Sur la sphère vide. A la mémoire de  Georges  Voronoï, Bulletin   de   l’Académie des   Sciences   de   l’URSS.   Classe   des   sciences mathématiques et na, 1934, Issue 6, 793–800.} La méthode Delaunay est caractérisée par son unicité et elle est décrite par :
+Boris Nikolaïevitch Delaunay, né le 15 mars 1890 à Saint-Pétersbourg et mort le 17 juillet 1980 à Moscou, était un mathématicien russe. Il a travaillé en algèbre moderne, en géométrie des nombres et en cristallographie mathématique. Il est le plus souvent reconnu pour son travail en 1934 sur les méthodes de triangulations  se basant sur le travail de Georges Voronoï et le diagramme de Voronoï. \footnote{B. Delaunay, Sur la sphère vide. A la mémoire de  Georges  Voronoï, Bulletin   de   l’Académie des   Sciences   de   l’URSS.   Classe   des   sciences mathématiques et na, 1934, Issue 6, 793–800.} La méthode Delaunay est caractérisée par son unicité et elle est décrite par :
 \newline
 \newline
 
@@ -125,7 +125,7 @@ Boris Nikolaïevitch Delaunay1, né le 15 mars 1890 à Saint-Pétersbourg et mor
 \underline {\textbf {Définition:}} La triangulation d'un ensemble P de points du plan est une triangulation de Delaunay en 2D, notée DT(P) si aucun point de P n'est à l'intérieur du cercle circonscrit d'un des triangles de DT(P).
 \newline
 \newline
-Cette méthode permet de générer un maillage en triangles ou les angles de chaque triangle sont les plus petits possibles, ce qui permet un maillage sans élément « trop différent » des autres, sans pour autant être complètement régulier. Elle implique une très longue liste de propriétés mais la plus importante dans notre cas est celle du basculement. En effet, pour deux triangles donnés, la somme des angles  et  est inférieure ou égale à 180 si et seulement si ces triangles respectent la condition de Delaunay, cette condition constitue ainsi un test et/ou un moyen de construction pour la triangulation de Delaunay. 
+Cette méthode permet de générer un maillage en triangles ou les angles de chaque triangle sont les plus petits possibles, ce qui permet un maillage sans élément « trop différent » des autres, sans pour autant être complètement régulier. Elle implique une très longue liste de propriétés mais la plus importante dans notre cas est celle du basculement. En effet, pour deux triangles donnés, la somme des angles    est inférieure ou égale à 180 si et seulement si ces triangles respectent la condition de Delaunay, cette condition constitue ainsi un test et/ou un moyen de construction pour la triangulation de Delaunay. 
 
 \newpage
 Par ailleurs, si deux triangles ne respectent pas la condition de Delaunay, remplacer une arête commune par l'autre arête commune génére ainsi deux triangles qui respectent la condition de Delaunay, on appelle cela un basculement. 
@@ -157,7 +157,9 @@ Par ailleurs, si deux triangles ne respectent pas la condition de Delaunay, remp
 Pour introduire le sujet du maillage, nous avons commencé par l’exemple de domaine le plus trivial possible : le carré unitaire. 
 \newline
 Il a s’agit ici d’écrire un programme en Python qui permet de mailler un carré unitaire en sous-carrés répartis de manière égale puis de subdiviser chaque sous-carré en triangles.
-De plus, nous devions faire en sorte de pouvoir choisir en combien de sous-carrés nous allions diviser le carré unitaire ((N-1)*(M-1) sous-carrés dans notre code, où N et M sont des entiers strictement plus grands que 1). Enfin, le programme génère des tableaux contentant une numérotation des coordonnées de chaque point ainsi qu’une numérotation de chaque triangle, suivi des sommets qui le constitue (connectivité). Ces numérotations respectent la même règle : chaque triangle devait voir la numérotation de ses sommets croitre en parcourant les points dans le même sens.
+De plus, nous devions faire en sorte de pouvoir choisir en combien de sous-carrés nous allions diviser le carré unitaire ((N-1)*(M-1) sous-carrés dans notre code, où N et M sont des entiers strictement plus grands que 1). 
+\newline
+ Enfin, le programme génère des tableaux contentant une numérotation des coordonnées de chaque point ainsi qu’une numérotation de chaque triangle, suivi des sommets qui le constitue (connectivité). Ces numérotations respectent la même règle : chaque triangle devait voir la numérotation de ses sommets croitre en parcourant les points dans le même sens.
 \newline
 Nous avons donc respecté ces contraintes en séparant les cas des triangles supérieurs et inférieurs qui chacun respectait son sens de « parcours ».   
 
@@ -165,19 +167,19 @@ Nous avons donc respecté ces contraintes en séparant les cas des triangles sup
 \begin{figure}[h]	
 	\centering
 \includegraphics[scale=0.9]{illustrations/6}
-\caption{Captures d’écran du return du programme pour deux cas différents (lorsque N=M, et lorsque N/= M).}
+\caption{Captures d’écran du retour du programme pour deux cas différents (lorsque N=M, et lorsque N/= M).}
 \end{figure}
 
 
 
 
-
+\newpage
 
 
 \subsection{ Maillage d’un nuage de points }
 \subsubsection{Avancement }
 
-Apres la première étape, le deuxième objectif était de réaliser un maillage de nuages de points quelconque. Pour réaliser ceci, nous avons d'abord écrit un code permettant de générer aléatoirement des points dans un carré prédéfini à l'avance. La fonction nuage de points prend en argument deux réels (les bornes du carré où sont générés les points), un entier strictement positif (le nombre de points) et un réel (la distance minimale entre chaque paire de points) et renvoie donc un ensemble de points contenus dans un certain carré. 
+Apres la première étape, le deuxième objectif était de réaliser un maillage de nuages de points quelconque. Pour réaliser ceci, nous avons d'abord écrit un code permettant de générer aléatoirement des points dans un carré prédéfini à l'avance. la fonction nuage de points prend en argument  deux réels (les bornes du carré où sont générés les points), un entier strictement positif (le nombre de points) et un réel (la distance minimale entre chaque paire de points) et renvoie donc un ensemble de points contenus dans un certain carré. 
 \newline
 En outre nous avons créer un programme afin de définir toutes les arêtes de notre triangulation et donc in fine de les répertorier dans un tableur afin d'avoir un tableau des connectivités. la fonction arêtes prend en argument un tableau contenant tous les triangles et renvoie les arêtes de ces triangles.
 
@@ -203,6 +205,8 @@ Pour les semaines à venir, notre objectif commun est de réussir à obtenir dan
 Par la suite, nous pourrons nous concentrer sur l’optimisation de notre code, en termes de temps et de ressources.
 \newline
 Enfin, si nous parvenons à cette étape, nous pourrions passer à l’étape du maillage d’une surface, en méthode de maillage contraint ce qui nous permettrait de « modéliser » certains objets, ou encore mailler une image quelconque.
+\newline
+Dans une toute autre optique, notre but serait de savoir manier Github un logiciel de gestion de versions décentralisé, ce qui nous permettrait de travailler de façon plus synchronisée et plus constructive.
 
 
 \begin{figure}	
@@ -212,7 +216,7 @@ Enfin, si nous parvenons à cette étape, nous pourrions passer à l’étape du
 \end{figure}
 
 
-\newpage
+
 \section{ Conclusion  }
 
 Pour conclure, nous avons parcouru un bon nombre de sujets concernant le maillage et la triangulation qui nous ont permis de comprendre et d’apprendre certaines méthodes dont l’application dans le monde est immédiate, et ce malgré la restriction à la 2D.
