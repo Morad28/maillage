@@ -251,8 +251,8 @@ def arete_dans_triangle(arete,triangle):
     else:
         return False
 
-def bowyer_watson(maillage,nuage_point,point):
-    Cavite=[]
+def bowyer_watson(maillage,nuage_point,point):      #Algorithme de Bowyer et Watson, en O(n) (et pas en O(n²) comme annoncé lors de la soutenance)
+    Cavite=[]                                       # n nombre de points 
     N_maillage=[]
     nouveau_point=len(nuage_point)+1
     
@@ -309,7 +309,7 @@ def afficher_maillage(maillage,nuage_point):
         plt.triplot([x1,x2,x3],[y1,y2,y3])
     plt.show()
     
-def maillage(liste_point):                       #Algorithme de maillage d'un nuage de point 
+def maillage(liste_point):                       #Algorithme de maillage d'un nuage de point en O(n²)
     M=[[1,2,4],[1,3,4],[2,3,4]]                  #Création du triangle 0, qu'on supprimera après 
     NP=[[-1,-1],[-1,10],[10,-1],liste_point[0]]   
     LP=liste_point[:]
