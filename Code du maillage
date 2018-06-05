@@ -145,15 +145,17 @@ def cercle(x0,y0,R):                    #Permet de tracer un cercle de centre (x
     plt.plot(X, Y)
     plt.axis("equal")
     
-def cercle_circonscrit(T):              #Permet de renvoyer le centre et le rayon du cercle circonscrit au triangle T
+def cercle_circonscrit(T,NP):              #Permet de renvoyer le centre et le rayon du cercle circonscrit au triangle T
     p1,p2,p3=T
-    x1,y1=p1
-    x2,y2=p2
-    x3,y3=p3
+    x1,y1=NP[p1-1]
+    x2,y2=NP[p2-1]
+    x3,y3=NP[p3-1]
     A=np.array([[x2-x1,y2-y1],[x3-x1,y3-y1]])
     B=np.array([[(x2**2-x1**2+y2**2-y1**2)/2],[(x3**2-x1**2+y3**2-y1**2)/2]])
     X=np.linalg.solve(A,B)
     R=np.linalg.norm(X-np.array([[x1],[y1]]))
+#    cercle(X[0],X[1],R)
+#    plt.triplot([x1,x2,x3],[y1,y2,y3])
     return(X,R)
 
           
@@ -295,7 +297,7 @@ def bowyer_watson(maillage,nuage_point,point):
             N_maillage=N_maillage+[[t1,t3,nouveau_point]]
                 
         
-    return(maillage+N_maillage,nuage_point+[point])  
+    return(maillage+N_maillage,nuage_point+[point])    
 
 def afficher_maillage(maillage,nuage_point):
     N=nuage_point
@@ -306,3 +308,19 @@ def afficher_maillage(maillage,nuage_point):
         x3,y3=N[t3-1]
         plt.triplot([x1,x2,x3],[y1,y2,y3])
     plt.show()
+    
+def maillage(liste_point):                       #Algorithme de maillage d'un nuage de point 
+    M=[[1,2,4],[1,3,4],[2,3,4]]                  #Création du triangle 0, qu'on supprimera après 
+    NP=[[-1,-1],[-1,10],[10,-1],liste_point[0]]   
+    LP=liste_point[:]
+    LP.pop(0)
+    
+    for P in LP:
+        M,NP=bowyer_watson(M,NP,P)
+    maillage=M[:]
+
+    for L in M:
+        if (1 in L) or (2 in L) or (3 in L):
+            maillage.remove(L)
+
+    return(maillage,NP)    
