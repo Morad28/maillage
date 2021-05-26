@@ -110,7 +110,9 @@ def nuage(N,xmin,xmax,e):
     plt.plot([xmin,xmax,xmax,xmin,xmin],[xmin,xmin,xmax,xmax,xmin])    
     plt.scatter(X,Y,c="r",s=10)
     plt.axis("equal")
-    plt.show()
+    #plt.show()
+    plt.close()
+    return(L)
     
     
 def point_dans_triangle(point,triangle):        #Test si un point est dans un triangle ou pas, et renvoie True si c'est le cas
@@ -264,13 +266,14 @@ def bowyer_watson(maillage,nuage_point,point):      #Algorithme de Bowyer et Wat
     for t in Cavite:
         maillage.remove(t)
     
+
     for t in Cavite:
         t1,t2,t3=t
         Liste=Cavite[:]
         Liste.remove(t)
-       
+        #print(Liste)
+        B=True
         for T in Liste:
-           B=True
            if  arete_dans_triangle([t1,t2],T):
                 B=False
                 break
@@ -324,3 +327,8 @@ def maillage(liste_point):                       #Algorithme de maillage d'un nu
             maillage.remove(L)
 
     return(maillage,NP)    
+    
+
+    
+
+ 
